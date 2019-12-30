@@ -22,5 +22,4 @@ public class Player {
         cards.add(card);
     }
     
-    // TODO 추가 기능 구현
 }

@@ -9,6 +9,7 @@ public class Board {
 	List<Card> cards;
 	List<Player> players;
 	Dealer dealer;
+	Iterator iterator;
 	
 	public Board(){
 		init();
@@ -18,6 +19,7 @@ public class Board {
 		sc = new Scanner(System.in);
 		cards = CardFactory.create();
 		createPlayers();
+		iterator = players.iterator();
 	}
 	
 	public void createPlayers() {
@@ -28,14 +30,14 @@ public class Board {
 		createPlayer(users);
 	}
 	
-	private String[] getNameInput() {
+	public String[] getNameInput() {
 		String names[];
 		System.out.println("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)");
 		names = sc.next().split(",");
 		return names;
 	}
 	
-	private Map<String,String> createUsers(String[] names) {
+	public Map<String,String> createUsers(String[] names) {
 		Map<String,String> users =  new HashMap<String,String>();
 		String bettingMoney;
 		for(int i=0 ; i<names.length;i++) {
@@ -46,7 +48,7 @@ public class Board {
 		return users;
 	}
 	
-	private void createPlayer(Map<String,String> users) {
+	public void createPlayer(Map<String,String> users) {
 		players = new ArrayList<Player>();
 		for(Map.Entry<String, String> user : users.entrySet() ) {
 			Player player = new Player(user.getKey(),Double.parseDouble(user.getValue()));
@@ -54,4 +56,22 @@ public class Board {
 		}
 	}
 	
+	public void giveTwoCardToPlayers() {
+		for(Player player : players) {
+			giveCard(player);
+			giveCard(player);
+		}
+	}
+	
+	public void giveCard(Player player) {
+		int random = (int)Math.random()*cards.size();
+		Card card = cards.remove(random);
+		player.addCard(card);
+	}
+	
+	
+	
+	
+	
+
 }
