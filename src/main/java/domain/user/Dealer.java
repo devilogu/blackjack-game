@@ -17,5 +17,10 @@ public class Dealer {
         cards.add(card);
     }
 
-    // TODO 추가 기능 구현
+    public void printCard() {
+    	System.out.print("딜러:");
+    	for(Card card:cards) {
+    		card.printCard();
+    	}
+    }
 }

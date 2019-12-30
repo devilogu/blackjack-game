@@ -69,7 +69,27 @@ public class Board {
 		player.addCard(card);
 	}
 	
+	public void printNoticeTwoCard() {
+		System.out.print("딜러와");
+		for(int i=0 ; i<players.size(); i++) {
+			System.out.print(players.get(i));
+			if(i!=players.size()-1) {
+				System.out.print(",");
+			}
+		}
+		System.out.println("에게 2장을 나누었습니다.");
+	}
 	
+	public void printAllPlayerCard() {
+		dealer.printCard();
+		for(Player player:players) {
+			printOnePlayerCard(player);
+		}
+		
+	}
+	public void printOnePlayerCard(Player player) {
+		player.printCard();
+	}
 	
 	
 	

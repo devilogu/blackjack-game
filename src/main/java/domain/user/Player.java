@@ -22,4 +22,11 @@ public class Player {
         cards.add(card);
     }
     
+    public void printCard() {
+    	System.out.print(name+"카드:");
+    	for(Card card:cards) {
+    		card.printCard();
+    	}
+    }
+    
 }
