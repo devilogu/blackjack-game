@@ -19,6 +19,7 @@ public class Blackjack {
 		sc = new Scanner(System.in);
 		cards = CardFactory.create();
 		dealer = new Dealer();
+		Rule rule = new Rule();
 		createPlayers();
 	}
 	
