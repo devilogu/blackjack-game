@@ -16,7 +16,7 @@ public class Card {
     }
 
     public void printCard() {
-    	System.out.print(this.symbol+""+this.type+" ");
+    	System.out.print("("+this.symbol.getScore()+","+this.type+")");
     }
 
     @Override

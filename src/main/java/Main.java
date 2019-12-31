@@ -1,9 +1,10 @@
-import domain.board.Board;
+import domain.board.Blackjack;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Board board = new Board();
+		Blackjack board = new Blackjack();
+		board.game();
 	}
 
 }

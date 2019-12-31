@@ -4,29 +4,29 @@ import domain.card.*;
 import domain.user.*;
 import java.util.*;
 
-public class Board {
+public class Blackjack {
 	Scanner sc;
 	List<Card> cards;
 	List<Player> players;
 	Dealer dealer;
 	Iterator iterator;
 	
-	public Board(){
+	public Blackjack(){
 		init();
 	}
 	
 	public void init() {
 		sc = new Scanner(System.in);
 		cards = CardFactory.create();
+		dealer = new Dealer();
 		createPlayers();
-		iterator = players.iterator();
 	}
 	
 	public void createPlayers() {
 		String names[];
 		Map<String,String> users;
 		names = getNameInput();
-		users = createUsers(names);
+		users = setBettingMoney(names);
 		createPlayer(users);
 	}
 	
@@ -37,12 +37,13 @@ public class Board {
 		return names;
 	}
 	
-	public Map<String,String> createUsers(String[] names) {
+	public Map<String,String> setBettingMoney(String[] names) {
 		Map<String,String> users =  new HashMap<String,String>();
 		String bettingMoney;
 		for(int i=0 ; i<names.length;i++) {
 			System.out.println(names[i]+"의 배팅 금액은?");
-			bettingMoney = sc.next();
+			bettingMoney = "10000";
+//			bettingMoney = sc.next();
 			users.put(names[i], bettingMoney);
 		}
 		return users;
@@ -55,24 +56,34 @@ public class Board {
 			players.add(player);
 		}
 	}
-	
-	public void giveTwoCardToPlayers() {
+	/* 딜러, 플레이어에게 카드 두장 주기. 
+	 * cards에서 카드 한장 지우고 그 카드를 유저에게 주는 giveCardTo 함수 2번호출
+	 * */
+	public void giveTwoCardToAll() {
+		giveCardToDealer(dealer);
+		giveCardToDealer(dealer);
 		for(Player player : players) {
-			giveCard(player);
-			giveCard(player);
+			giveCardToPlayer(player);
+			giveCardToPlayer(player);
 		}
 	}
 	
-	public void giveCard(Player player) {
+	public void giveCardToPlayer(Player player) {
 		int random = (int)Math.random()*cards.size();
 		Card card = cards.remove(random);
 		player.addCard(card);
 	}
 	
+	public void giveCardToDealer(Dealer dealer) {
+		int random = (int)(Math.random()*(cards.size()-1));
+		Card card = cards.remove(random);
+		dealer.addCard(card);
+	}
+	
 	public void printNoticeTwoCard() {
-		System.out.print("딜러와");
+		System.out.print("딜러와 ");
 		for(int i=0 ; i<players.size(); i++) {
-			System.out.print(players.get(i));
+			System.out.print(players.get(i).getName());
 			if(i!=players.size()-1) {
 				System.out.print(",");
 			}
@@ -85,10 +96,32 @@ public class Board {
 		for(Player player:players) {
 			printOnePlayerCard(player);
 		}
-		
 	}
+	
 	public void printOnePlayerCard(Player player) {
 		player.printCard();
+	}
+	
+	//카드를 더 받는 메서드가 Player클래스에 없는 이유는 cards에서 card를  remove하려면 
+	//cards가 선언된 Board 클래스에서 이루어져야 한다.
+	public Player askCard(Player player) {
+    	String ask="y";
+    	Scanner sc = new Scanner(System.in);
+    	while(true){
+    		System.out.println(player.getName()+"는 한장의 카드를 더 받겠습니까?");
+    		ask = sc.next();
+    		if(ask.equals("n")) {
+    			break;
+    		}
+    		giveCardToPlayer(player);
+    	}
+    	return player;
+    }
+	
+	public void game() {
+		printNoticeTwoCard();
+		giveTwoCardToAll();
+		printAllPlayerCard();
 	}
 	
 	
