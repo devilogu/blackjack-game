@@ -9,7 +9,7 @@ public class Blackjack {
 	List<Card> cards;
 	List<Player> players;
 	Dealer dealer;
-	Iterator iterator;
+	Rule rule;
 	
 	public Blackjack(){
 		init();
@@ -19,6 +19,7 @@ public class Blackjack {
 		sc = new Scanner(System.in);
 		cards = CardFactory.create();
 		dealer = new Dealer();
+		rule = new Rule();
 		Rule rule = new Rule();
 		createPlayers();
 	}
@@ -47,6 +48,7 @@ public class Blackjack {
 //			bettingMoney = sc.next();
 			users.put(names[i], bettingMoney);
 		}
+		System.out.println();
 		return users;
 	}
 	
@@ -73,6 +75,7 @@ public class Blackjack {
 		int random = (int)Math.random()*cards.size();
 		Card card = cards.remove(random);
 		player.addCard(card);
+		
 	}
 	
 	public void giveCardToDealer(Dealer dealer) {
@@ -97,6 +100,7 @@ public class Blackjack {
 		for(Player player:players) {
 			printOnePlayerCard(player);
 		}
+		System.out.println();
 	}
 	
 	public void printOnePlayerCard(Player player) {
@@ -112,18 +116,35 @@ public class Blackjack {
     		System.out.println(player.getName()+"는 한장의 카드를 더 받겠습니까?");
     		ask = sc.next();
     		if(ask.equals("n")) {
+    			printOnePlayerCard(player);
     			break;
     		}
     		giveCardToPlayer(player);
+    		printOnePlayerCard(player);
     	}
     	return player;
     }
+	
+	void decideDealerGettingCard(Dealer dealer) {
+		if(rule.dealerCanGetCard(dealer)) {
+			System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.\n");
+			giveCardToDealer(dealer);
+		}
+	}
 	
 	public void game() {
 		printNoticeTwoCard();
 		giveTwoCardToAll();
 		printAllPlayerCard();
+		for(Player player:players){
+			player = askCard(player);
+			
+		}
+		decideDealerGettingCard(dealer);
+		printAllPlayerCard();
 	}
+	
+	
 	
 	
 	

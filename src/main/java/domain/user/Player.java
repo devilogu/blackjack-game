@@ -35,6 +35,10 @@ public class Player {
     	return this.name;
     }
     
+    public List<Card> getCards(){
+    	return this.cards;
+    }
+    
     
     
     

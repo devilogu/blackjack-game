@@ -15,8 +15,8 @@ public class Card {
         this.type = type;
     }
 
-    public void printCard() {
-    	System.out.print("("+this.symbol.getScore()+","+this.type+")");
+    public void printCard() {  
+    	System.out.print("("+this.symbol+","+this.type+")");
     }
 
     @Override
@@ -39,5 +39,9 @@ public class Card {
                 "symbol=" + symbol +
                 ", type=" + type +
                 '}';
+    }
+    
+    public int getScore() {
+    	return this.symbol.getScore();
     }
 }

@@ -24,4 +24,8 @@ public class Dealer {
     	}
     	System.out.println();
     }
+    
+    public List<Card> getCards(){
+    	return this.cards;
+    }
 }
