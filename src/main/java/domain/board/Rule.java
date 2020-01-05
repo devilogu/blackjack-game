@@ -1,8 +1,6 @@
 package domain.board;
-import java.util.ArrayList;
 import java.util.List;
 
-import domain.board.*;
 import domain.card.*;
 import domain.user.*;
 
@@ -62,7 +60,6 @@ public class Rule {
 	 * */
 	public double getBettingResult(Dealer dealer, List<Player> players) {
 		double dealerMoney=0,playerMoney=0;
-		List<Player> blackjackPlayers = new ArrayList<Player>();		
 		if(isDealerBlackjack(dealer)){
 			for(int i=0 ; i<players.size();i++) {
 				if(!isPlayerBlackjack(players.get(i))) {

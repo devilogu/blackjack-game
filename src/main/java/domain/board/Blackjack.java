@@ -20,7 +20,7 @@ public class Blackjack {
 		cards = CardFactory.create();
 		dealer = new Dealer();
 		rule = new Rule();
-		Rule rule = new Rule();
+		rule = new Rule();
 		createPlayers();
 	}
 	
@@ -44,8 +44,7 @@ public class Blackjack {
 		String bettingMoney;
 		for(int i=0 ; i<names.length;i++) {
 			System.out.println(names[i]+"의 배팅 금액은?");
-			bettingMoney = "10000";
-//			bettingMoney = sc.next();
+			bettingMoney = sc.next();
 			users.put(names[i], bettingMoney);
 		}
 		System.out.println();
@@ -145,6 +144,10 @@ public class Blackjack {
 	public void printBettingResult() {
 		double dealerMoney = rule.getBettingResult(dealer, players);
 		System.out.println("##최종 수익");
+		System.out.println("딜러: "+dealerMoney);
+		for(Player player:players) {
+			System.out.println(player.getName()+": "+player.getBettingMoney());
+		}
 	}
 	
 	public void game() {
@@ -156,8 +159,8 @@ public class Blackjack {
 		}
 		decideDealerGettingCard(dealer);
 		printAllPlayerCardwithScore();
-
-		
+		printBettingResult();
+		sc.close();
 	}
 	
 	
