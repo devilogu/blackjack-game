@@ -44,7 +44,8 @@ public class Blackjack {
 		String bettingMoney;
 		for(int i=0 ; i<names.length;i++) {
 			System.out.println(names[i]+"의 배팅 금액은?");
-			bettingMoney = sc.next();
+//			bettingMoney = sc.next();
+			bettingMoney = "1000";
 			users.put(names[i], bettingMoney);
 		}
 		System.out.println();
@@ -146,7 +147,7 @@ public class Blackjack {
 		System.out.println("##최종 수익");
 		System.out.println("딜러: "+dealerMoney);
 		for(Player player:players) {
-			System.out.println(player.getName()+": "+player.getBettingMoney());
+			System.out.println(player.getName()+": "+(int)player.getBettingMoney());
 		}
 	}
 	
