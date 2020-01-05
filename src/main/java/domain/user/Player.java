@@ -11,12 +11,28 @@ import java.util.Scanner;
  */
 public class Player {
     private final String name;
-    private final double bettingMoney;
+    private double bettingMoney;
     private final List<Card> cards = new ArrayList<>();
 
     public Player(String name, double bettingMoney) {
         this.name = name;
         this.bettingMoney = bettingMoney;
+    }
+    
+    public String getName() {
+    	return this.name;
+    }
+    
+    public List<Card> getCards(){
+    	return this.cards;
+    }
+    
+    public double getBettingMoney() {
+    	return this.bettingMoney;
+    }
+    
+    public void setBettingMoney(double money) {
+    	this.bettingMoney = money;
     }
 
     public void addCard(Card card) {
@@ -31,13 +47,9 @@ public class Player {
     	System.out.println();
     }
     
-    public String getName() {
-    	return this.name;
-    }
+   
     
-    public List<Card> getCards(){
-    	return this.cards;
-    }
+    
     
     
     

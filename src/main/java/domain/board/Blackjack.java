@@ -103,6 +103,16 @@ public class Blackjack {
 		System.out.println();
 	}
 	
+	public void printAllPlayerCardwithScore() {
+		dealer.printCard();
+		System.out.println("딜러결과:"+rule.getDealerScore(dealer));
+		for(Player player:players) {
+			printOnePlayerCard(player);
+			System.out.println(player.getName()+"결과:"+rule.getPlayerScore(player));
+		}
+		System.out.println();
+	}
+	
 	public void printOnePlayerCard(Player player) {
 		player.printCard();
 	}
@@ -132,16 +142,22 @@ public class Blackjack {
 		}
 	}
 	
+	public void printBettingResult() {
+		double dealerMoney = rule.getBettingResult(dealer, players);
+		System.out.println("##최종 수익");
+	}
+	
 	public void game() {
 		printNoticeTwoCard();
 		giveTwoCardToAll();
 		printAllPlayerCard();
 		for(Player player:players){
-			player = askCard(player);
-			
+			player = askCard(player);	
 		}
 		decideDealerGettingCard(dealer);
-		printAllPlayerCard();
+		printAllPlayerCardwithScore();
+
+		
 	}
 	
 	

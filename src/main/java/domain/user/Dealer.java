@@ -12,6 +12,11 @@ public class Dealer {
     private final List<Card> cards =  new ArrayList<>();
 
     public Dealer() {}
+    
+    
+    public List<Card> getCards(){
+    	return this.cards;
+    }
 
     public void addCard(Card card) {
         cards.add(card);
@@ -24,8 +29,5 @@ public class Dealer {
     	}
     	System.out.println();
     }
-    
-    public List<Card> getCards(){
-    	return this.cards;
-    }
+   
 }
